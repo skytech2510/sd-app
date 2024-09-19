@@ -14,7 +14,7 @@ class SolutionController extends Controller
      */
     public function index()
     {
-        
+
         $solutions = Solution::where('status_id','=',1)->get();
 
         return Inertia::render(
@@ -43,11 +43,11 @@ class SolutionController extends Controller
         $request->validate([
             'name' => 'required|string|max:255'
         ]);
-        
+
         Solution::create([
             'name' => $request->name,
             'status_id' => 1,
-        ]);        
+        ]);
         sleep(1);
 
         return redirect()->route('solution.index')->with('message', 'Solução Criada Com Sucesso');
@@ -67,7 +67,7 @@ class SolutionController extends Controller
     public function edit(Solution $solution)
     {
         return Inertia::render(
-            'Solution/Edit', 
+            'Solution/Edit',
             [
                 'solution' => $solution
             ]

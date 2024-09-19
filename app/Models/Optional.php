@@ -9,7 +9,7 @@ class Optional extends Model
 {
     use HasFactory;
     protected $table = 'optionals';
-    protected $fillable = ["name", "status_id"];
+    protected $fillable = ["name", "status_id", "observation", "annotation", "manufacturer_id", "price"];
     public function status()
     {
         return $this->belongsTo(Status::class);

@@ -20,7 +20,6 @@ watch(term, (value) => {
 });
 
 const props = defineProps({
-  solutions: Object,
   optionals: Object,
 });
 </script>
@@ -34,7 +33,7 @@ const props = defineProps({
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
           <div class="grid grid-cols-7 gap-3 px-4 py-6 text-slate-600">
             <div class="">
-              <ButtonLink variant="primary" class="block" value="/solucao/criar"
+              <ButtonLink variant="primary" class="block" value="/opcionals/criar"
                 >NOVO OPCIONAL
               </ButtonLink>
             </div>
@@ -82,7 +81,7 @@ const props = defineProps({
                 <td>
                   <ButtonLink
                     variant="basic"
-                    :href="`/solucao/${optional.id}/editar`"
+                    :href="`/optionals/${optional.id}/editar`"
                     class=""
                   >
                     <svg

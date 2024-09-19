@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('optionals', function (Blueprint $table) {
             $table->id();
             $table->string("name");
+            $table->string("observation");
+            $table->string("annotation");
             $table->unsignedBigInteger('status_id');
             $table->unsignedBigInteger("manufacturer_id");
             $table->float("price", 8, 2);
