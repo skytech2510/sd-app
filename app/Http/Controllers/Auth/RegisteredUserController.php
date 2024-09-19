@@ -46,9 +46,8 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'last_interaction' => now(),
-            'status_id' => 1,
+            'status_id' => $status->id,
         ]);
-        $user->assignRole('admin');
         event(new Registered($user));
         Auth::login($user);
 

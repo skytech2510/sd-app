@@ -12,7 +12,7 @@ import { router } from "@inertiajs/vue3";
 let term = ref("");
 const breadcrumb = ref({
   page: { id: 1, name: "Configurações", url: "/configuracao" },
-  link: { id: 1, name: "Solução", url: "/optional" },
+  link: { id: 1, name: "Optional", url: "/optionals" },
 });
 
 watch(term, (value) => {
@@ -20,13 +20,12 @@ watch(term, (value) => {
 });
 
 const props = defineProps({
-  solutions: Object,
+  optionals: Object,
 });
 </script>
 
 <template>
   <Head title="Optional" />
-
   <AuthenticatedLayout>
     <div class="mx-auto max-w-7xl sm:px-4 lg:px-10">
       <breadcrumb :value="breadcrumb" class="pt-4 pb-6" />
@@ -34,7 +33,7 @@ const props = defineProps({
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
           <div class="grid grid-cols-7 gap-3 px-4 py-6 text-slate-600">
             <div class="">
-              <ButtonLink variant="primary" class="block" value="/solucao/criar"
+              <ButtonLink variant="primary" class="block" value="/opcionals/criar"
                 >NOVO OPCIONAL
               </ButtonLink>
             </div>
@@ -64,21 +63,25 @@ const props = defineProps({
             </thead>
             <tbody>
               <tr
-                v-for="solution in solutions"
-                :key="solution.id"
+                v-for="optional in optionals"
+                :key="optional.id"
                 class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-slate-600"
               >
                 <td scope="row" class="px-6 py-4">
-                  {{ solution.id }}
+                  {{ optional.id }}
                 </td>
                 <td scope="row" class="w-full px-6">
-                  {{ solution.name }}
+                  {{ optional.name }}
                 </td>
+                <td scope="row" class="w-full px-6">
+                  {{ optional["manufacturer"]["name"] }}
+                </td>
+                <td scope="row" class="w-full px-6">$ {{ optional.price }}</td>
 
                 <td>
                   <ButtonLink
                     variant="basic"
-                    :href="`/solucao/${solution.id}/editar`"
+                    :href="`/optionals/${optional.id}/editar`"
                     class=""
                   >
                     <svg
