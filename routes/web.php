@@ -244,6 +244,7 @@ Route::controller(SolutionController::class)->group(function () {
 
  Route::controller(OptionalController::class)->group(function () {
     Route::get("/optionals", "index")->name('optional.index');
+    Route::get('/opcional/criar','create')->name('optional.create');
  });
 
 

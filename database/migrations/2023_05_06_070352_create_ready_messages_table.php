@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('ready_messages', function (Blueprint $table) {
-            $table->id();            
+            $table->id();
             $table->string('title');
             $table->text('message');
             $table->unsignedBigInteger('status_id');

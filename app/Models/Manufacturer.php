@@ -9,4 +9,8 @@ class Manufacturer extends Model
 {
     use HasFactory;
     protected $fillable = ['name', 'status_id', 'company_id'];
+    public function Optional()
+    {
+        return $this->hasMany(Optional::class);
+    }
 }
