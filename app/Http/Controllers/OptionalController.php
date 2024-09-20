@@ -9,11 +9,16 @@ use Inertia\Inertia;
 
 class OptionalController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $optionals = Optional::with(['status', 'manufacturer'])->get();
+        $optionals = Optional::when($request->term, function ($query) use ($request) {
+            $query->where('name', 'LIKE', '%'.$request->term.'%')->paginate();
 
-        return Inertia::render('Optional/Index', ['optionals' => $optionals]);
+        }, function ($query) {
+            $query->orderBy('id')->paginate();
+        })->with(['status', 'manufacturer'])->get();
+
+        return Inertia::render('Optional/Index', ['optionals' => $optionals, 'filter' => $request->term]);
     }
 
     public function create()

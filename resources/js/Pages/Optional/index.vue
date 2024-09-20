@@ -16,7 +16,14 @@ const breadcrumb = ref({
 });
 
 watch(term, (value) => {
-  router.get("/solucao", { term: value });
+  router.get(
+    "/optionals",
+    { term: value },
+    {
+      preserveState: true,
+      replace: true,
+    }
+  );
 });
 
 const props = defineProps({
