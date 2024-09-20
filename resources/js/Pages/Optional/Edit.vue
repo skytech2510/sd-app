@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, Link, useForm } from "@inertiajs/vue3";
 import Button from "@/Components/Button.vue";
@@ -13,23 +13,32 @@ const breadcrumb = ref({
   page: { id: 1, name: "Configurações", url: "/configuracao" },
   link: { id: 1, name: "Mensagens Rápidas", url: "/messagem-rapida" },
 });
+const props = defineProps({
+  manufacturers: Object,
+  optional: Object,
+});
 const form = useForm({
+  id: null,
   name: null,
   manufacturer_id: null,
   price: 0,
   observation: null,
   annotation: null,
 });
-const props = defineProps({
-  manufacturers: Object,
-});
 function storeMessage() {
-  form.post("/optionals/add");
+  form.post("/opcionals/update");
 }
+onMounted(() => {
+  form.name = props.optional.name;
+  form.annotation = props.optional.annotation;
+  form.observation = props.optional.observation;
+  form.manufacturer_id = props.optional.manufacturer_id;
+  form.price = props.optional.price;
+  form.id = props.optional.id;
+});
 </script>
 <template>
   <Head title="Messagens Rápidas" />
-
   <AuthenticatedLayout>
     <div class="pt-4 mx-auto max-w-7xl sm:px-4 lg:px-10">
       <breadcrumb :value="breadcrumb" type="back" class="pb-5" />
@@ -59,7 +68,7 @@ function storeMessage() {
                       class="block mb-2 text-sm font-mecold dium text-slate-900 dark:text-slate-300"
                       >Fabricação
                     </Inputlabel>
-                    <select v-model="manufacturer_id">
+                    <select v-model="form.manufacturer_id">
                       <option :value="null">Selecione</option>
                       <option
                         v-for="manufacturer in manufacturers"
@@ -122,6 +131,7 @@ function storeMessage() {
                     <InputLabel>Anotações</InputLabel>
                     <textarea class="w-full" v-model="form.annotation"></textarea>
                   </div>
+                  <input hidden v-model="form.id" />
                 </div>
               </div>
               <div class="grid grid-cols-1 pt-6 gap-x-6 gap-y-8 sm:grid-cols-6">
@@ -135,7 +145,7 @@ function storeMessage() {
                   >
                     SALVAR
                   </Button>
-                  <ButtonLink variant="default" class="" value="/messagem-rapida"
+                  <ButtonLink variant="default" class="" value="/optionals"
                     >VOLTAR
                   </ButtonLink>
                 </div>
