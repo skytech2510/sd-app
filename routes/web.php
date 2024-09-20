@@ -1,43 +1,41 @@
 <?php
 
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\EstadoController;
-use App\Http\Controllers\StatusController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ReadyMessageController;
-use App\Http\Controllers\FunnelStepController;
-use App\Http\Controllers\FunnelController;
+use App\Http\Controllers\BotController;
+use App\Http\Controllers\BotWorkFlowController;
+use App\Http\Controllers\CampaignController;
+use App\Http\Controllers\ChannelController;
 use App\Http\Controllers\CidadeController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EstadoController;
+use App\Http\Controllers\FormCampaignController;
+use App\Http\Controllers\FunnelController;
+use App\Http\Controllers\FunnelStepController;
+use App\Http\Controllers\LeadController;
+use App\Http\Controllers\LeadMessageController;
+use App\Http\Controllers\LeadNotesController;
+use App\Http\Controllers\LeadScheduleController;
+use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\OptionalController;
+use App\Http\Controllers\OrigemController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProposalController;
+use App\Http\Controllers\ReadyMessageController;
+use App\Http\Controllers\ReceivableController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\SocialAuthFacebookController;
+use App\Http\Controllers\SolutionController;
+use App\Http\Controllers\StatusController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserQueueController;
-use App\Http\Controllers\OrigemController;
-use App\Http\Controllers\LeadController;
-use App\Http\Controllers\NotificationController;
-use App\Http\Controllers\LeadMessageController;
-use App\Http\Controllers\LeadScheduleController;
-use App\Http\Controllers\LeadNotesController;
-use App\Http\Controllers\ChannelController;
-use App\Http\Controllers\ProposalController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\PaymentController;
-use App\Http\Controllers\ReportController;
-use App\Http\Controllers\CampaignController;
-use App\Http\Controllers\FormCampaignController;
-use App\Http\Controllers\ReceivableController;
-use App\Http\Controllers\BotController;
-use App\Http\Controllers\SolutionController;
-use App\Http\Controllers\BotWorkFlowController;
-use App\Http\Controllers\SocialAuthFacebookController;
-use App\Http\Controllers\OptionalController;
 use App\Mail\NotificationMail;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Mail;
 use Inertia\Inertia;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -82,7 +80,7 @@ Route::controller(ReportController::class)->group(function () {
     Route::get('/relatorios', 'index')->name('reports');
 });
 
-Route::group(['middleware' => ['auth', 'verified']], function(){
+Route::group(['middleware' => ['auth', 'verified']], function () {
 
     Route::controller(DashboardController::class)->group(function () {
         Route::get('/dashboard', 'index')->name('dashboard');
@@ -94,7 +92,7 @@ Route::group(['middleware' => ['auth', 'verified']], function(){
         Route::get('/relatorio-de-pagamentos/associacao', 'association')->name('payment.association');
         Route::post('/relatorio-de-pagamentos/upload', 'importFile')->name('payment.upload');
         Route::put('/relatorio-de-pagamentos/{payment}/desassociacao', 'disassociation')->name('payment.disassociation');
-        Route::delete('relatorio-de-pagamentos/{payment}','destroy')->name('payment.destroy');
+        Route::delete('relatorio-de-pagamentos/{payment}', 'destroy')->name('payment.destroy');
     });
 
     Route::controller(FunnelController::class)->group(function () {
@@ -108,12 +106,12 @@ Route::group(['middleware' => ['auth', 'verified']], function(){
         Route::get('/lead/criar', 'create')->name('lead.create');
         Route::get('/lead/{lead}/', 'view')->name('lead.view');
         Route::get('/lead/{lead}/editar', 'edit')->name('lead.edit');
-        Route::get('/leads','getLeads');
-        Route::get('/leadswaiting','getWaiting');
-        Route::get('/leadsschedule','getSchedule');
-        Route::get('/leadsfavorite','getFavorite');
-        Route::get('/leadspendding','getPendding');
-        Route::get('/lead-relatorio','export')->name('lead.export');
+        Route::get('/leads', 'getLeads');
+        Route::get('/leadswaiting', 'getWaiting');
+        Route::get('/leadsschedule', 'getSchedule');
+        Route::get('/leadsfavorite', 'getFavorite');
+        Route::get('/leadspendding', 'getPendding');
+        Route::get('/lead-relatorio', 'export')->name('lead.export');
         Route::put('/lead-funelstep', 'setFunnelStep')->name('lead.funnelstep');
         Route::put('/lead/{lead}/favoritar', 'setFavorite')->name('lead.favorite');
         Route::put('/lead/{lead}/classificar', 'setStars')->name('lead.star');
@@ -136,25 +134,25 @@ Route::group(['middleware' => ['auth', 'verified']], function(){
     });
 
     Route::controller(ProposalController::class)->group(function () {
-        Route::get('/proposta','index')->name('proposal.index');
-        Route::get('/proposta/criar','create')->name('proposal.create');
+        Route::get('/proposta', 'index')->name('proposal.index');
+        Route::get('/proposta/criar', 'create')->name('proposal.create');
         Route::get('/proposta/{proposal}/editar', 'edit')->name('proposal.edit');
-        Route::put('/proposta/{proposal}','update')->name('proposal.update');
+        Route::put('/proposta/{proposal}', 'update')->name('proposal.update');
         Route::put('/proposta/{proposal}/aprovar', 'approve')->name('proposal.approve');
         Route::put('/proposta/{proposal}/apropriacao', 'appropriation')->name('proposal.appropriation');
         Route::put('/proposta/{proposal}/desprovacao', 'unpprove')->name('proposal.unpprove');
-        Route::delete('/proposta/{proposal}','destroy')->name('proposal.destroy');
+        Route::delete('/proposta/{proposal}', 'destroy')->name('proposal.destroy');
         Route::post('/proposta', 'store')->name('proposal.store');
     });
 
     Route::controller(ReceivableController::class)->group(function () {
-        Route::get('/conta-receber','index')->name('receivable.index');
+        Route::get('/conta-receber', 'index')->name('receivable.index');
         Route::get('/conta-receber/{receivable}/editar', 'edit')->name('receivable.edit');
-        Route::get('/conta-receber-relatorio','export')->name('receivable.export');
-        Route::put('/conta-receber/{receivable}','update')->name('receivable.update');
+        Route::get('/conta-receber-relatorio', 'export')->name('receivable.export');
+        Route::put('/conta-receber/{receivable}', 'update')->name('receivable.update');
         Route::put('/conta-receber/{receivable}/aprovar', 'approve')->name('receivable.approve');
         Route::put('/conta-receber/{receivable}/desprovacao', 'unpprove')->name('receivable.unpprove');
-        Route::delete('/conta-receber/{receivable}','destroy')->name('receivable.destroy');
+        Route::delete('/conta-receber/{receivable}', 'destroy')->name('receivable.destroy');
         Route::post('/conta-receber', 'store')->name('receivable.store');
     });
 
@@ -163,20 +161,20 @@ Route::group(['middleware' => ['auth', 'verified']], function(){
     });
 
     Route::controller(CampaignController::class)->group(function () {
-        Route::get('/campanha','index')->name('campaign.index');
-        Route::get('/campanha/criar','create')->name('campaign.create');
+        Route::get('/campanha', 'index')->name('campaign.index');
+        Route::get('/campanha/criar', 'create')->name('campaign.create');
         Route::get('/campanha/{campaign}/editar', 'edit')->name('campaign.edit');
-        Route::put('/campanha/{campaign}','update')->name('campaign.update');
-        Route::delete('/campanha/{campaign}','destroy')->name('campaign.destroy');
+        Route::put('/campanha/{campaign}', 'update')->name('campaign.update');
+        Route::delete('/campanha/{campaign}', 'destroy')->name('campaign.destroy');
         Route::post('/campanha', 'store')->name('campaign.store');
     });
 
     Route::controller(FormCampaignController::class)->group(function () {
-        Route::get('/formulario','index')->name('formcampaign.index');
-        Route::get('/formulario/criar','create')->name('formcampaign.create');
+        Route::get('/formulario', 'index')->name('formcampaign.index');
+        Route::get('/formulario/criar', 'create')->name('formcampaign.create');
         Route::get('/formulario/{form}/editar', 'edit')->name('formcampaign.edit');
-        Route::put('/formulario/{form}','update')->name('formcampaign.update');
-        Route::delete('/formulario/{form}','destroy')->name('formcampaign.destroy');
+        Route::put('/formulario/{form}', 'update')->name('formcampaign.update');
+        Route::delete('/formulario/{form}', 'destroy')->name('formcampaign.destroy');
         Route::post('/formulario', 'store')->name('formcampaign.store');
     });
 
@@ -206,115 +204,114 @@ Route::controller(CidadeController::class)->group(function () {
 })->middleware(['auth', 'verified']);
 
 Route::controller(EstadoController::class)->group(function () {
-    Route::get('/estado','index')->name('estado.index');
-    Route::get('/estado/criar','create')->name('estado.create');
+    Route::get('/estado', 'index')->name('estado.index');
+    Route::get('/estado/criar', 'create')->name('estado.create');
     Route::get('/estado/{estado}/editar', 'edit')->name('estado.edit');
-    Route::put('/estado/{estado}','update')->name('estado.update');
-    Route::delete('/estado/{estado}','destroy')->name('estado.destroy');
+    Route::put('/estado/{estado}', 'update')->name('estado.update');
+    Route::delete('/estado/{estado}', 'destroy')->name('estado.destroy');
     Route::post('/estado', 'store')->name('estado.store');
 })->middleware(['auth', 'verified']);
 
 Route::controller(CompanyController::class)->group(function () {
-    Route::get('/empresa','index')->name('company.index');
-    Route::get('/empresa/criar','create')->name('company.create');
+    Route::get('/empresa', 'index')->name('company.index');
+    Route::get('/empresa/criar', 'create')->name('company.create');
     Route::get('/empresa/{company}/editar', 'edit')->name('company.edit');
-    Route::put('/empresa/{company}','update')->name('company.update');
-    Route::delete('/empresa/{company}','destroy')->name('company.destroy');
+    Route::put('/empresa/{company}', 'update')->name('company.update');
+    Route::delete('/empresa/{company}', 'destroy')->name('company.destroy');
     Route::post('/empresa', 'store')->name('company.store');
 })->middleware(['auth', 'verified']);
 
 Route::controller(ChannelController::class)->group(function () {
-    Route::get('/canal','index')->name('channel.index');
-    Route::get('/canal/criar','create')->name('channel.create');
+    Route::get('/canal', 'index')->name('channel.index');
+    Route::get('/canal/criar', 'create')->name('channel.create');
     Route::get('/canal/{channel}/editar', 'edit')->name('channel.edit');
-    Route::put('/canal/{channel}','update')->name('channel.update');
-    Route::delete('/canal/{channel}','destroy')->name('channel.destroy');
+    Route::put('/canal/{channel}', 'update')->name('channel.update');
+    Route::delete('/canal/{channel}', 'destroy')->name('channel.destroy');
     Route::post('/canal', 'store')->name('channel.store');
 })->middleware(['auth', 'verified']);
 
-
 Route::controller(SolutionController::class)->group(function () {
-    Route::get('/solucao','index')->name('solution.index');
-    Route::get('/solucao/criar','create')->name('solution.create');
+    Route::get('/solucao', 'index')->name('solution.index');
+    Route::get('/solucao/criar', 'create')->name('solution.create');
     Route::get('/solucao/{solution}/editar', 'edit')->name('solution.edit');
-    Route::put('/solucao/{solution}','update')->name('solution.update');
-    Route::delete('/solucao/{solution}','destroy')->name('solution.destroy');
+    Route::put('/solucao/{solution}', 'update')->name('solution.update');
+    Route::delete('/solucao/{solution}', 'destroy')->name('solution.destroy');
     Route::post('/solucao', 'store')->name('solution.store');
 })->middleware(['auth', 'verified']);
 
- Route::controller(OptionalController::class)->group(function () {
-    Route::get("/optionals", "index")->name('optional.index');
-    Route::post("/optionals/add", "store")->name('optional.store');
-    Route::get('/opcionals/criar','create')->name('optional.create');
-    Route::get('/opcionals/{optional}','update')->name('optional.update');
- });
-
+Route::controller(OptionalController::class)->group(function () {
+    Route::get('/optionals', 'index')->name('optional.index');
+    Route::post('/optionals/add', 'store')->name('optional.store');
+    Route::get('/opcionals/criar', 'create')->name('optional.create');
+    Route::post('/opcionals/update', 'update')->name('optional.update');
+    Route::get('/optionals/{optional}/editar', 'edit')->name('optional.edit');
+})->middleware(['auth', 'verified']);
 
 Route::controller(OrigemController::class)->group(function () {
-    Route::get('/origem','index')->name('origem.index');
-    Route::get('/origem/criar','create')->name('origem.create');
+    Route::get('/origem', 'index')->name('origem.index');
+    Route::get('/origem/criar', 'create')->name('origem.create');
     Route::get('/origem/{origem}/editar', 'edit')->name('origem.edit');
-    Route::put('/origem/{origem}','update')->name('origem.update');
-    Route::delete('/origem/{channel}','destroy')->name('origem.destroy');
+    Route::put('/origem/{origem}', 'update')->name('origem.update');
+    Route::delete('/origem/{channel}', 'destroy')->name('origem.destroy');
     Route::post('/origem', 'store')->name('origem.store');
 })->middleware(['auth', 'verified']);
 
 Route::controller(NotificationController::class)->group(function () {
-    Route::get('/notificacao','index')->name('notification.index');
-    Route::get('/notificacao/criar','create')->name('notification.create');
+    Route::get('/notificacao', 'index')->name('notification.index');
+    Route::get('/notificacao/criar', 'create')->name('notification.create');
     Route::get('/notificacao/{notification}/editar', 'edit')->name('notification.edit');
     Route::get('/notificacao/show', 'show')->name('notification.show');
-    Route::put('/notificacao/{notification}','update')->name('notification.update');
-    Route::delete('/notificacao/{notification}','destroy')->name('notification.destroy');
+    Route::put('/notificacao/{notification}', 'update')->name('notification.update');
+    Route::delete('/notificacao/{notification}', 'destroy')->name('notification.destroy');
     Route::post('/notificacao', 'store')->name('notification.store');
 })->middleware(['auth', 'verified']);
 
 Route::controller(StatusController::class)->group(function () {
-    Route::get('/status','index')->name('status.index');
-    Route::get('/status/criar','create')->name('status.create');
+    Route::get('/status', 'index')->name('status.index');
+    Route::get('/status/criar', 'create')->name('status.create');
     Route::get('/status/{status}/editar', 'edit')->name('status.edit');
-    Route::put('/status/{status}','update')->name('status.update');
-    Route::delete('/status/{status}','destroy')->name('status.destroy');
+    Route::put('/status/{status}', 'update')->name('status.update');
+    Route::delete('/status/{status}', 'destroy')->name('status.destroy');
     Route::post('/status', 'store')->name('status.store');
 })->middleware(['auth', 'verified']);
 
 Route::controller(ProductController::class)->group(function () {
-    Route::get('/produto','index')->name('product.index');
-    Route::get('/produto/criar','create')->name('product.create');
+    Route::get('/produto', 'index')->name('product.index');
+    Route::get('/produto/criar', 'create')->name('product.create');
     Route::get('/produto/{product}/editar', 'edit')->name('product.edit');
-    Route::put('/produto/{product}','update')->name('product.update');
-    Route::delete('/produto/{status}','destroy')->name('product.destroy');
+    Route::put('/produto/{product}', 'update')->name('product.update');
+    Route::delete('/produto/{status}', 'destroy')->name('product.destroy');
     Route::post('/produto', 'store')->name('product.store');
 })->middleware(['auth', 'verified']);
 
 Route::controller(FunnelStepController::class)->group(function () {
-    Route::get('/etapa-de-funil','index')->name('funnelstep.index');
-    Route::get('/etapa-de-funil/criar','create')->name('funnelstep.create');
+    Route::get('/etapa-de-funil', 'index')->name('funnelstep.index');
+    Route::get('/etapa-de-funil/criar', 'create')->name('funnelstep.create');
     Route::get('/etapa-de-funil/{step}/editar', 'edit')->name('funnelstep.edit');
-    Route::put('/etapa-de-funil/{step}','update')->name('funnelstep.update');
-    Route::delete('/etapa-de-funil/{status}','destroy')->name('funnelstep.destroy');
+    Route::put('/etapa-de-funil/{step}', 'update')->name('funnelstep.update');
+    Route::delete('/etapa-de-funil/{status}', 'destroy')->name('funnelstep.destroy');
     Route::post('/etapa-de-funil', 'store')->name('funnelstep.store');
 })->middleware(['auth', 'verified']);
 
 Route::controller(ReadyMessageController::class)->group(function () {
-    Route::get('/messagem-rapida','index')->name('message.index');
-    Route::get('/messagem-rapida/criar','create')->name('message.create');
+    Route::get('/messagem-rapida', 'index')->name('message.index');
+    Route::get('/messagem-rapida/criar', 'create')->name('message.create');
     Route::get('/messagem-rapida/{message}/editar', 'edit')->name('message.edit');
-    Route::put('/messagem-rapida/{message}','update')->name('message.update');
-    Route::delete('/messagem-rapida/{message}','destroy')->name('message.destroy');
+    Route::put('/messagem-rapida/{message}', 'update')->name('message.update');
+    Route::delete('/messagem-rapida/{message}', 'destroy')->name('message.destroy');
     Route::post('/messagem-rapida', 'store')->name('message.store');
 })->middleware(['auth', 'verified']);
 
 Route::controller(UserController::class)->group(function () {
-    Route::get('/usuario','index')->name('user.index');
-    Route::get('/usuario/criar','create')->name('user.create');
+    Route::get('/usuario', 'index')->name('user.index');
+    Route::get('/usuario/criar', 'create')->name('user.create');
     Route::get('/usuario/setcompany', 'setCompany')->name('user.setcompany');
     Route::get('/usuario/getcompany', 'getCompany')->name('user.getcompany');
     Route::get('/usuario/{user}/editar', 'edit')->name('user.edit');
-    Route::put('/usuario/{user}','update')->name('user.update');
-    Route::put('/usuario/{user}/pausar','pause')->name('user.pause');
-    Route::put('/usuario/{user}/play','play')->name('user.play');
-    Route::put('/usuario/{user}/destroy','destroy')->name('user.destroy');
+    Route::put('/usuario/{user}', 'update')->name('user.update');
+    Route::put('/usuario/{user}/pausar', 'pause')->name('user.pause');
+    Route::put('/usuario/{user}/play', 'play')->name('user.play');
+    Route::put('/usuario/{user}/destroy', 'destroy')->name('user.destroy');
     Route::post('/usuario', 'store')->name('user.store');
 })->middleware(['auth', 'verified']);
 
@@ -325,24 +322,22 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::controller(BotController::class)->group(function () {
-    Route::get('/bot','index')->name('bot.index');
+    Route::get('/bot', 'index')->name('bot.index');
     Route::get('/bot/{bot}/editar', 'edit')->name('bot.edit');
-    Route::put('/bot/{bot}','update')->name('bot.update');
+    Route::put('/bot/{bot}', 'update')->name('bot.update');
     Route::put('/bot/{bot}/status', 'setStatus')->name('bot.status');
     Route::post('/bot', 'handle');
 })->middleware(['auth', 'verified']);
 
-
 Route::controller(BotWorkFlowController::class)->group(function () {
-    Route::put('/botworkflow/{bot}','update')->name('botworkflow.update');
+    Route::put('/botworkflow/{bot}', 'update')->name('botworkflow.update');
 })->middleware(['auth', 'verified']);
 
-
-Route::get('/email', function(){
-    return new NotificationMail();
+Route::get('/email', function () {
+    return new NotificationMail;
 });
 
-Route::get('password-reset', function() {
+Route::get('password-reset', function () {
     $user = App\Models\User::where('email', 'nathalia@portobrasilconsorcios.com.br')->first();
     $user->password = Hash::make('##1122');
     $user->save();
@@ -350,22 +345,19 @@ Route::get('password-reset', function() {
     return 'Success!';
 });
 
-Route::get('ativar-usuario', function() {
+Route::get('ativar-usuario', function () {
 
     $user = User::find(2);
-    $role = Role::where('id', '=' , 1)->select('name')->get();
+    $role = Role::where('id', '=', 1)->select('name')->get();
     $user->assignRole($role[0]['name']);
+
     return 'Success!';
 });
 
-
-
-
-Route::get('clear-session', function() {
+Route::get('clear-session', function () {
     Session::flush();
+
     return 'Success!';
 });
-
 
 require __DIR__.'/auth.php';
-
