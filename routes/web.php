@@ -28,6 +28,7 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SocialAuthFacebookController;
 use App\Http\Controllers\SolutionController;
 use App\Http\Controllers\StatusController;
+use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserQueueController;
 use App\Mail\NotificationMail;
@@ -245,6 +246,14 @@ Route::controller(OptionalController::class)->group(function () {
     Route::get('/opcionals/criar', 'create')->name('optional.create');
     Route::post('/opcionals/update', 'update')->name('optional.update');
     Route::get('/optionals/{optional}/editar', 'edit')->name('optional.edit');
+})->middleware(['auth', 'verified']);
+
+Route::controller(SupplierController::class)->group(function () {
+    Route::get('/fornecedores', 'index')->name('supplier.index');
+    Route::post('/fornecedores/add', 'store')->name('supplier.store');
+    Route::get('/fornecedores/criar', 'create')->name('supplier.create');
+    Route::post('/fornecedores/update', 'update')->name('supplier.update');
+    Route::get('/fornecedores/{optional}/editar', 'edit')->name('supplier.edit');
 })->middleware(['auth', 'verified']);
 
 Route::controller(OrigemController::class)->group(function () {

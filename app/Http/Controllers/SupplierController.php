@@ -7,7 +7,7 @@ use App\Models\Optional;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class OptionalController extends Controller
+class SupplierController extends Controller
 {
     public function index(Request $request)
     {
@@ -18,7 +18,7 @@ class OptionalController extends Controller
             $query->orderBy('id')->paginate();
         })->with(['status', 'manufacturer'])->get();
 
-        return Inertia::render('Optional/Index', ['optionals' => $optionals, 'filter' => $request->term]);
+        return Inertia::render('Supplier/Index', ['optionals' => $optionals, 'filter' => $request->term]);
     }
 
     public function create()
