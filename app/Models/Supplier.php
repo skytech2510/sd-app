@@ -5,40 +5,45 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Optional extends Model
+class Supplier extends Model
 {
     use HasFactory;
 
-    protected $table = 'suppliers';
-
     protected $fillable = [
         'name',
-        'fantansy_name',
+        'fantasy_name',
         'document',
         'ie',
         'zip_code',
         'address',
         'number_address',
         'complement_address',
-        'state_id',
-        'city_id',
         'region',
+        'city_id',
+        'state_id',
         'accountable_name',
         'phone',
         'cellphone',
         'email',
         'site',
+
         'status_id',
         'company_id',
     ];
 
-    public function status()
+    public function City()
     {
-        return $this->belongsTo(Status::class);
+        return $this->belongsTo(Cidade::class, 'city_id')->select([
+            'id',
+            'nome',
+        ]);
     }
 
-    public function manufacturer()
+    public function State()
     {
-        return $this->belongsTo(Manufacturer::class);
+        return $this->belongsTo(Estado::class, 'state_id')->select([
+            'id',
+            'nome',
+        ]);
     }
 }
