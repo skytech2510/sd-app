@@ -249,11 +249,12 @@ Route::controller(OptionalController::class)->group(function () {
 })->middleware(['auth', 'verified']);
 
 Route::controller(SupplierController::class)->group(function () {
-    Route::get('/fornecedores', 'index')->name('supplier.index');
-    Route::post('/fornecedores/add', 'store')->name('supplier.store');
-    Route::get('/fornecedores/criar', 'create')->name('supplier.create');
-    Route::post('/fornecedores/update', 'update')->name('supplier.update');
-    Route::get('/fornecedores/{optional}/editar', 'edit')->name('supplier.edit');
+    Route::get('/fornecedor', 'index')->name('supplier.index');
+    Route::get('/fornecedor/criar', 'create')->name('supplier.create');
+    Route::get('/fornecedor/{supplier}/editar', 'edit')->name('supplier.edit');
+    Route::put('/fornecedor/{supplier}', 'update')->name('supplier.update');
+    Route::delete('/fornecedor/{supplier}', 'destroy')->name('supplier.destroy');
+    Route::post('/fornecedor', 'store')->name('supplier.store');
 })->middleware(['auth', 'verified']);
 
 Route::controller(OrigemController::class)->group(function () {
