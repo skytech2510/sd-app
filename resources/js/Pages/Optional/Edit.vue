@@ -61,14 +61,17 @@ onMounted(() => {
                     {{ form.errors.title }}
                   </div>
                 </div>
-                <div class="grid grid-cols-3 mt-3">
+                <div class="grid grid-cols-3 gap-3 mt-3">
                   <div>
                     <Inputlabel
                       for="Fabricação"
                       class="block mb-2 text-sm font-mecold dium text-slate-900 dark:text-slate-300"
                       >Fabricação
                     </Inputlabel>
-                    <select v-model="form.manufacturer_id " class="w-full text-sm border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-indigo-500">
+                    <select
+                      v-model="form.manufacturer_id"
+                      class="w-full text-sm border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-indigo-500"
+                    >
                       <option :value="null">Selecione</option>
                       <option
                         v-for="manufacturer in manufacturers"
@@ -88,7 +91,10 @@ onMounted(() => {
                       class="block mb-2 text-sm font-mecold dium text-slate-900 dark:text-slate-300"
                       >Fabricação
                     </Inputlabel>
-                    <select v-model="form.manufacturer_id" class="w-full text-sm border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-indigo-500">
+                    <select
+                      v-model="form.manufacturer_id"
+                      class="w-full text-sm border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-indigo-500"
+                    >
                       <option :value="null">Selecione</option>
                       <option
                         v-for="manufacturer in manufacturers"
@@ -103,8 +109,14 @@ onMounted(() => {
                     </div>
                   </div>
                   <div>
-                    <InputLabel> preço </InputLabel>
-                    <input type="number" v-model="form.price" />
+                    <TextInput
+                      textLabel="Preço"
+                      type="number"
+                      v-model="form.price"
+                      name="name"
+                      class="w-full"
+                      placeholder=""
+                    />
                     <div v-if="form.errors.title" class="mt-2 text-sm text-red-500">
                       {{ form.errors.title }}
                     </div>
