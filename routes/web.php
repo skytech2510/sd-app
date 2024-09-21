@@ -5,9 +5,12 @@ use App\Http\Controllers\BotWorkFlowController;
 use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\ChannelController;
 use App\Http\Controllers\CidadeController;
+use App\Http\Controllers\ClientController;
+use App\Http\Controllers\CollectionController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EstadoController;
+use App\Http\Controllers\FabricController;
 use App\Http\Controllers\FormCampaignController;
 use App\Http\Controllers\FunnelController;
 use App\Http\Controllers\FunnelStepController;
@@ -101,7 +104,14 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::put('/funil/{id}', 'update')->name('funnel.update');
         Route::put('/funil/{lists}/move', 'move')->name('funnel.move');
     });
-
+    Route::controller(CollectionController::class)->group(function () {
+        Route::get('/colecao', 'index')->name('collection.index');
+        Route::get('/colecao/criar', 'create')->name('collection.create');
+        Route::get('/colecao/{collection}/editar', 'edit')->name('collection.edit');
+        Route::put('/colecao/{collection}', 'update')->name('collection.update');
+        Route::delete('/colecao/{collection}', 'destroy')->name('collection.destroy');
+        Route::post('/colecao', 'store')->name('collection.store');
+    })->middleware(['auth', 'verified']);
     Route::controller(LeadController::class)->group(function () {
         Route::get('/lead', 'index')->name('lead.index');
         Route::get('/lead/criar', 'create')->name('lead.create');
@@ -123,7 +133,14 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::post('/lead', 'store')->name('lead.store');
 
     });
-
+    Route::controller(FabricController::class)->group(function () {
+        Route::get('/tecido', 'index')->name('fabric.index');
+        Route::get('/tecido/criar', 'create')->name('fabric.create');
+        Route::get('/tecido/{fabric}/editar', 'edit')->name('fabric.edit');
+        Route::put('/tecido/{fabric}', 'update')->name('fabric.update');
+        Route::delete('/tecido/{fabric}', 'destroy')->name('fabric.destroy');
+        Route::post('/tecido', 'store')->name('fabric.store');
+    })->middleware(['auth', 'verified']);
     Route::controller(LeadMessageController::class)->group(function () {
         Route::get('/lead-message', 'index')->name('leadmessage.index');
         Route::get('/lead-message/criar', 'create')->name('leadmessage.create');
@@ -169,7 +186,14 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::delete('/campanha/{campaign}', 'destroy')->name('campaign.destroy');
         Route::post('/campanha', 'store')->name('campaign.store');
     });
-
+    Route::controller(ClientController::class)->group(function () {
+        Route::get('/cliente', 'index')->name('client.index');
+        Route::get('/cliente/criar', 'create')->name('client.create');
+        Route::get('/cliente/{client}/editar', 'edit')->name('client.edit');
+        Route::put('/cliente/{client}', 'update')->name('client.update');
+        Route::delete('/cliente/{client}', 'destroy')->name('client.destroy');
+        Route::post('/cliente', 'store')->name('client.store');
+    })->middleware(['auth', 'verified']);
     Route::controller(FormCampaignController::class)->group(function () {
         Route::get('/formulario', 'index')->name('formcampaign.index');
         Route::get('/formulario/criar', 'create')->name('formcampaign.create');

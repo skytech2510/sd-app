@@ -59,7 +59,10 @@ function storeMessage() {
                       class="block mb-2 text-sm font-mecold dium text-slate-900 dark:text-slate-300"
                       >Fabricação
                     </Inputlabel>
-                    <select v-model="manufacturer_id">
+                    <select
+                      v-model="manufacturer_id"
+                      class="w-full text-sm border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-indigo-500"
+                    >
                       <option :value="null">Selecione</option>
                       <option
                         v-for="manufacturer in manufacturers"
@@ -79,7 +82,10 @@ function storeMessage() {
                       class="block mb-2 text-sm font-mecold dium text-slate-900 dark:text-slate-300"
                       >Fabricação
                     </Inputlabel>
-                    <select v-model="form.manufacturer_id">
+                    <select
+                      v-model="form.manufacturer_id"
+                      class="w-full text-sm border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-indigo-500"
+                    >
                       <option :value="null">Selecione</option>
                       <option
                         v-for="manufacturer in manufacturers"
