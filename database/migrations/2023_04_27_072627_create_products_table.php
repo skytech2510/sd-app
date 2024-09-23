@@ -15,10 +15,24 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->unsignedBigInteger('status_id');
+            $table->string('supplier_code');
+            $table->string('item');
+            $table->string('color');
+            $table->string('size');
+            $table->string('NCM');
+            $table->string('CFOP');
+            $table->string('cost');
+            $table->integer('discount');
+            $table->integer('ST');
+            $table->integer('IPI');
+            $table->integer('freight');
+            $table->integer('markup');
+            $table->integer('price');
+            $table->string('observation');
             $table->timestamps();
 
             $table->foreign('status_id')->references('id')->on('status')
-            ->onDelete('cascade');
+                ->onDelete('cascade');
         });
     }
 
