@@ -70,7 +70,7 @@ function updateProduct() {
                         textLabel="Cod. Fornecedor"
                         type="text"
                         v-model="form.supplier_code"
-                        name="name"
+                        name="supplier_code"
                         class="w-full"
                         placeholder=""
                       />
