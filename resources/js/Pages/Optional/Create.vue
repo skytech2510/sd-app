@@ -48,11 +48,11 @@ function storeMessage() {
                     class="w-full"
                     placeholder=""
                   />
-                  <div v-if="form.errors.title" class="mt-2 text-sm text-red-500">
-                    {{ form.errors.title }}
+                  <div v-if="form.errors.name" class="mt-2 text-sm text-red-500">
+                    {{ form.errors.name }}
                   </div>
                 </div>
-                <div class="grid grid-cols-3 mt-3">
+                <div class="grid grid-cols-3 gap-3 mt-3">
                   <div>
                     <Inputlabel
                       for="Fabricação"
@@ -72,8 +72,11 @@ function storeMessage() {
                         {{ manufacturer.name }}
                       </option>
                     </select>
-                    <div v-if="form.errors.message" class="mt-2 text-sm text-red-500">
-                      {{ form.errors.message }}
+                    <div
+                      v-if="form.errors.manufacturer_id"
+                      class="mt-2 text-sm text-red-500"
+                    >
+                      {{ form.errors.manufacturer_id }}
                     </div>
                   </div>
                   <div>
@@ -95,15 +98,22 @@ function storeMessage() {
                         {{ manufacturer.name }}
                       </option>
                     </select>
-                    <div v-if="form.errors.message" class="mt-2 text-sm text-red-500">
-                      {{ form.errors.message }}
+                    <div
+                      v-if="form.errors.manufacturer_id"
+                      class="mt-2 text-sm text-red-500"
+                    >
+                      {{ form.errors.manufacturer_id }}
                     </div>
                   </div>
                   <div>
-                    <InputLabel> preço </InputLabel>
-                    <input type="number" v-model="form.price" />
-                    <div v-if="form.errors.title" class="mt-2 text-sm text-red-500">
-                      {{ form.errors.title }}
+                    <TextInput
+                      textLabel="preço"
+                      type="number"
+                      name="price"
+                      v-model="form.price"
+                    />
+                    <div v-if="form.errors.price" class="mt-2 text-sm text-red-500">
+                      {{ form.errors.price }}
                     </div>
                   </div>
                 </div>
@@ -120,8 +130,8 @@ function storeMessage() {
                       class="w-full"
                       placeholder=""
                     />
-                    <div v-if="form.errors.title" class="mt-2 text-sm text-red-500">
-                      {{ form.errors.title }}
+                    <div v-if="form.errors.observation" class="mt-2 text-sm text-red-500">
+                      {{ form.errors.observation }}
                     </div>
                   </div>
                   <div>
