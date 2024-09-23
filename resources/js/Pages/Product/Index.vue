@@ -9,17 +9,25 @@ import dayjs from "dayjs";
 import ButtonLink from "@/Components/ButtonLink.vue";
 import { router } from "@inertiajs/vue3";
 
-let term = ref("");
+let term = ref(props.term);
 const breadcrumb = ref({
   page: { id: 1, name: "Configurações", url: "/configuracao" },
   link: { id: 1, name: "Produto", url: "/produto" },
 });
 const props = defineProps({
   products: Object,
+  term: String,
 });
 
 watch(term, (value) => {
-  router.get("/product", { term: value });
+  router.get(
+    "/produto",
+    { term: value },
+    {
+      preserveState: true,
+      replace: true,
+    }
+  );
 });
 
 function destroy(id) {
