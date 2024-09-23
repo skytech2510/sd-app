@@ -35,6 +35,9 @@ class OptionalController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'observation' => 'nullable|string',
+            'manufacturer_id' => 'required|exists:manufacturers,id',
+            'price' => 'numeric|min:0',
+            'annotation' => 'nullable|string',
         ]);
         Optional::create([
             'name' => $request->name,
@@ -64,6 +67,10 @@ class OptionalController extends Controller
         $optional = Optional::find(['id' => $request->id])[0];
         $request->validate([
             'name' => 'required|string|max:255',
+            'observation' => 'nullable|string',
+            'manufacturer_id' => 'required|exists:manufacturers,id',
+            'price' => 'numeric|min:0',
+            'annotation' => 'nullable|string',
         ]);
         $optional->name = $request->name;
         $optional->observation = $request->observation;
