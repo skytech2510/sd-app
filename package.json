@@ -28,6 +28,7 @@
         "@vuepic/vue-datepicker": "^5.0.1",
         "@vueup/vue-quill": "^1.1.1",
         "chart.js": "^3.9.1",
+        "dayjs": "^1.11.13",
         "flowbite": "^1.6.5",
         "flowbite-vue": "^0.0.10",
         "laravel-vue-pagination": "^4.1.1",

@@ -313,7 +313,7 @@ Route::controller(ProductController::class)->group(function () {
     Route::get('/produto', 'index')->name('product.index');
     Route::get('/produto/criar', 'create')->name('product.create');
     Route::get('/produto/{product}/editar', 'edit')->name('product.edit');
-    Route::put('/produto/{product}', 'update')->name('product.update');
+    Route::post('/produto/update', 'update')->name('product.update');
     Route::delete('/produto/{status}', 'destroy')->name('product.destroy');
     Route::post('/produto', 'store')->name('product.store');
 })->middleware(['auth', 'verified']);

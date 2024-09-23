@@ -21,11 +21,11 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('campaign_id')->references('id')->on('campaigns')
-            ->onDelete('cascade');
+                ->onDelete('cascade');
             $table->foreign('status_id')->references('id')->on('status')
-            ->onDelete('cascade');
+                ->onDelete('cascade');
         });
-        
+
     }
 
     /**
