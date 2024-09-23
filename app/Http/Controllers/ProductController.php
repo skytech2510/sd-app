@@ -139,6 +139,23 @@ class ProductController extends Controller
         $product = Product::find(['id' => $request->id])[0];
         $request->validate([
             'name' => 'required|string|max:255',
+            'supplier_code' => 'required|string|max:255',
+            'solution_id' => 'required|exists:solutions,id', // Assuming 'solutions' table exists
+            'manufacturer_id' => 'required|exists:manufacturers,id', // Assuming 'manufacturers' table exists
+            'supplier_id' => 'required|exists:suppliers,id', // Assuming 'suppliers' table exists
+            'item' => 'required|string',
+            'color' => 'required|string',
+            'cost' => 'required|numeric|gt:0',
+            'size' => 'required|string',
+            'NCM' => 'required|string',
+            'CFOP' => 'required|string',
+            'discount' => 'required|numeric|between:0,100', // Assuming discount is a percentage
+            'ST' => 'required|numeric|between:0,100', // Assuming discount is a percentage
+            'IPI' => 'required|numeric|between:0,100', // Assuming discount is a percentage
+            'freight' => 'required|numeric|between:0,100', // Assuming discount is a percentage
+            'markup' => 'required|numeric', // Assuming discount is a percentage
+            'price' => 'required|numeric', // Assuming discount is a percentage
+            'observation' => 'required|string', // Assuming discount is a percentage
         ]);
         $product->name = $request->name;
         $product->supplier_code = $request->supplier_code;
