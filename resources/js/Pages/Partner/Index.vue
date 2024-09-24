@@ -4,8 +4,8 @@ import Breadcrumb from "@/Components/Breadcrumb.vue";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head } from "@inertiajs/vue3";
 import TextInput from "@/Components/TextInput.vue";
-import Pagination from "@/Components/Pagination.vue";
-import dayjs from "dayjs";
+// import Pagination from "@/Components/Pagination.vue";
+// import dayjs from "dayjs";
 import ButtonLink from "@/Components/ButtonLink.vue";
 import { router } from "@inertiajs/vue3";
 
