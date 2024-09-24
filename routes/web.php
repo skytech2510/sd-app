@@ -21,6 +21,7 @@ use App\Http\Controllers\LeadScheduleController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\OptionalController;
 use App\Http\Controllers\OrigemController;
+use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
@@ -316,6 +317,14 @@ Route::controller(ProductController::class)->group(function () {
     Route::post('/produto/update', 'update')->name('product.update');
     Route::delete('/produto/{status}', 'destroy')->name('product.destroy');
     Route::post('/produto', 'store')->name('product.store');
+})->middleware(['auth', 'verified']);
+Route::controller(PartnerController::class)->group(function () {
+    Route::get('/especificadores', 'index')->name('partner.index');
+    Route::get('/especificadores/criar', 'create')->name('partner.create');
+    Route::get('/especificadores/{especificadores}/editar', 'edit')->name('partner.edit');
+    Route::post('/especificadores/update', 'update')->name('partner.update');
+    Route::delete('/especificadores/{status}', 'destroy')->name('partner.destroy');
+    Route::post('/especificadores', 'store')->name('partner.store');
 })->middleware(['auth', 'verified']);
 
 Route::controller(FunnelStepController::class)->group(function () {
