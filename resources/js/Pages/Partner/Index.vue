@@ -20,7 +20,7 @@ const props = defineProps({
 
 watch(term, (value) => {
   router.get(
-    "/produto",
+    "/especificadores",
     { term: value },
     {
       preserveState: true,
@@ -30,7 +30,7 @@ watch(term, (value) => {
 });
 </script>
 <template>
-  <Head title="Produtos" />
+  <Head title="Especificadores" />
   <AuthenticatedLayout>
     <div class="mx-auto max-w-7xl sm:px-4 lg:px-10">
       <breadcrumb :value="breadcrumb" class="pt-4 pb-6" />
@@ -60,6 +60,7 @@ watch(term, (value) => {
             >
               <tr>
                 <th scope="col" class="px-6 py-2.5 w-2">#</th>
+                <th scope="col" class="px-6 py-2.5 w-2">NOME</th>
                 <th scope="col" class="px-6 font-light">TIPO</th>
                 <th scope="col" class="px-6 font-light">CONSULTANT(A)</th>
                 <th scope="col" class="px-6 font-light">TELEPHONE</th>
@@ -76,22 +77,25 @@ watch(term, (value) => {
                 <td scope="row" class="px-6 py-4">
                   {{ partner.id }}
                 </td>
+                <td scope="row" class="px-6 py-4">
+                  {{ partner.name }}
+                </td>
                 <td scope="row" class="w-full px-6">
                   {{ partner.type }}
                 </td>
                 <td scope="row" class="w-full px-6">
-                  {{ product.consultant }}
+                  {{ partner.consultant }}
                 </td>
                 <td scope="row" class="w-full px-6">
-                  {{ product.phone }}
+                  {{ partner.phone }}
                 </td>
                 <td scope="row" class="w-full px-6">
-                  {{ product.CPF }}
+                  {{ partner.CPF }}
                 </td>
                 <td>
                   <ButtonLink
                     variant="basic"
-                    :href="`/produto/${product.id}/editar`"
+                    :href="`/especificadores/${partner.id}/editar`"
                     class=""
                   >
                     <svg
