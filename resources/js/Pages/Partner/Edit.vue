@@ -151,7 +151,7 @@ function updateProduct() {
                         <InputLabel
                           for="gender"
                           class="block mb-2 text-sm font-mecold dium text-slate-600 dark:text-slate-300"
-                          >Tipo</InputLabel
+                          >Sexo</InputLabel
                         >
                         <select
                           name="Sexo"
