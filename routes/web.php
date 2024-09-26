@@ -331,6 +331,7 @@ Route::controller(PartnerController::class)->group(function () {
 Route::controller(StandardController::class)->group(function () {
     Route::get('/standard', 'index')->name('standard.index');
     Route::get('/standard/criar', 'create')->name('standard.create');
+    Route::get('/standard/{standard}/editar', 'edit')->name('standard.edit');
     Route::post('/standard', 'store')->name('standard.store');
     Route::get('/standard/getCollections/{solution_id}', 'getCollections')->name('standard.getCollections');
 })->middleware(['auth', 'verified']);

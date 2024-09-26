@@ -9,7 +9,7 @@ class Standard extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'solution_id', 'manufacturer_id', 'collection_ids', 'colors', 'min_width', 'max_width', 'min_height', 'max_height', 'max_area', 'product_feature', 'NCM', 'CFOP', 'drives', 'optionals', 'supplies'];
+    protected $fillable = ['name', 'solution_id', 'status_id', 'manufacturer_id', 'collection_ids', 'colors', 'min_width', 'max_width', 'min_height', 'max_height', 'max_area', 'product_feature', 'NCM', 'CFOP', 'drives', 'optionals', 'supplies'];
 
     protected $casts = [
         'collection_ids' => 'array',

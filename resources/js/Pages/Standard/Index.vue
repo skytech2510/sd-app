@@ -85,7 +85,7 @@ const props = defineProps({
                 <td>
                   <ButtonLink
                     variant="basic"
-                    :href="`/solucao/${solution.id}/editar`"
+                    :href="`/solucao/${standard.id}/editar`"
                     class=""
                   >
                     <svg
