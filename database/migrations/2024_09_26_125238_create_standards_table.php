@@ -33,6 +33,9 @@ return new class extends Migration
 
             $table->timestamps();
 
+            $table->foreign('solution_id')->references('id')->on('solutions')->onDelete('cascade');
+            $table->foreign('manufacturer_id')->references('id')->on('manufacturers')->onDelete('cascade');
+
         });
     }
 

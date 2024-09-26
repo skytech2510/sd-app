@@ -18,4 +18,14 @@ class Standard extends Model
         'supplies' => 'array',
         'colors' => 'array',
     ];
+
+    public function Solution()
+    {
+        return $this->belongsTo(Solution::class);
+    }
+
+    public function Manufacturer()
+    {
+        return $this->belongsTo(Manufacturer::class);
+    }
 }
