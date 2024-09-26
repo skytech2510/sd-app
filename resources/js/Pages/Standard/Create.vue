@@ -338,7 +338,7 @@ function storeSolution() {
                           </thead>
                           <tbody>
                             <tr v-for="(item, index) in form.supplies" :key="index">
-                              <td>{{ item.name }}</td>
+                              <td class="px-6 py-4">{{ item.name }}</td>
                               <td>{{ item.quality_per_meter }}</td>
                               <td>
                                 <Button
@@ -437,7 +437,7 @@ function storeSolution() {
                             </thead>
                             <tbody>
                               <tr v-for="(item, index) in form.drives" :key="index">
-                                <td>{{ item.trigger.name }}</td>
+                                <td class="px-6 py-4">{{ item.trigger.name }}</td>
                                 <td>{{ item.item }}</td>
                                 <td>$ {{ item.price }}</td>
                                 <td>
@@ -511,7 +511,7 @@ function storeSolution() {
                             </thead>
                             <tbody>
                               <tr v-for="(item, index) in form.optionals" :key="index">
-                                <td>{{ item.name }}</td>
+                                <td class="px-6 py-4">{{ item.name }}</td>
                                 <td>
                                   <Button
                                     @click="
