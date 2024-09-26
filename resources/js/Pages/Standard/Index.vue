@@ -12,11 +12,18 @@ import { router } from "@inertiajs/vue3";
 let term = ref("");
 const breadcrumb = ref({
   page: { id: 1, name: "Configurações", url: "/configuracao" },
-  link: { id: 1, name: "Solução", url: "/solucao" },
+  link: { id: 1, name: "standard", url: "/standard" },
 });
 
 watch(term, (value) => {
-  router.get("/standard", { term: value });
+  router.get(
+    "/standard",
+    { term: value },
+    {
+      preserveState: true,
+      replace: true,
+    }
+  );
 });
 
 const props = defineProps({
@@ -34,7 +41,7 @@ const props = defineProps({
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
           <div class="grid grid-cols-7 gap-3 px-4 py-6 text-slate-600">
             <div class="">
-              <ButtonLink variant="primary" class="block" value="/solucao/criar"
+              <ButtonLink variant="primary" class="block" value="/standard/criar"
                 >NOVO
               </ButtonLink>
             </div>
@@ -55,7 +62,6 @@ const props = defineProps({
               class="uppercase text-slate-600 bg-slate-300 dark:bg-gray-700 dark:text-gray-400"
             >
               <tr>
-                <th scope="col" class="px-6 py-2.5 w-2">#</th>
                 <th scope="col" class="px-6 font-light">ID</th>
                 <th scope="col" class="px-6 font-light">NOME</th>
                 <th scope="col" class="px-6 font-light">solução</th>
@@ -76,16 +82,16 @@ const props = defineProps({
                   {{ standard.name }}
                 </td>
                 <td scope="row" class="w-full px-6">
-                  {{ standard.soution_id }}
+                  {{ standard.solution.name }}
                 </td>
                 <td scope="row" class="w-full px-6">
-                  {{ standard.manufacturer_id }}
+                  {{ standard.manufacturer.name }}
                 </td>
 
                 <td>
                   <ButtonLink
                     variant="basic"
-                    :href="`/solucao/${standard.id}/editar`"
+                    :href="`/standard/${standard.id}/editar`"
                     class=""
                   >
                     <svg

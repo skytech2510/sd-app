@@ -10,7 +10,7 @@ import InputLabel from "@/Components/InputLabel.vue";
 import axios from "axios";
 const breadcrumb = ref({
   page: { id: 1, name: "Configurações", url: "/configuracao" },
-  link: { id: 2, name: "Solução", url: "/solucao" },
+  link: { id: 2, name: "standard", url: "/standard" },
 });
 const fittings = [
   { id: 1, name: "AAA" },

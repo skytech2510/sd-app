@@ -10,7 +10,7 @@ import InputLabel from "@/Components/InputLabel.vue";
 import axios from "axios";
 const breadcrumb = ref({
   page: { id: 1, name: "Configurações", url: "/configuracao" },
-  link: { id: 2, name: "Solução", url: "/solucao" },
+  link: { id: 2, name: "standard", url: "/standard" },
 });
 const fittings = [
   { id: 1, name: "AAA" },
@@ -37,8 +37,8 @@ const form = useForm({
   name: props.standard.name,
   solution_id: props.standard.solution_id,
   manufacturer_id: props.standard.manufacturer_id,
-  collection_ids: props.standard.collection_ids,
-  colors: props.standard.colors,
+  collection_ids: JSON.parse(props.standard.collection_ids),
+  colors: JSON.parse(props.standard.colors),
   min_width: props.standard.min_width,
   max_width: props.standard.max_width,
   min_height: props.standard.min_height,
@@ -47,9 +47,10 @@ const form = useForm({
   product_feature: props.standard.product_feature,
   NCM: props.standard.NCM,
   CFOP: props.standard.CFOP,
-  drives: props.standard.drives,
-  optionals: props.standard.optionals,
-  supplies: props.standard.supplies,
+  drives: JSON.parse(props.standard.drives),
+  optionals: JSON.parse(props.standard.optionals),
+  supplies: JSON.parse(props.standard.supplies),
+  id: props.standard.id,
 });
 const setSelectSolution = (event) => {
   getCollections(event.target.value);
@@ -102,13 +103,12 @@ const hardwareColors = [
 ];
 function storeSolution() {
   //   console.log(form.colors);
-  form.post(route("standard.store"));
+  form.post(route("standard.update"));
 }
 </script>
 
 <template>
   <Head title="Canal" />
-  {{ form.errors }}
   <AuthenticatedLayout>
     <div class="pt-4 mx-auto max-w-7xl sm:px-4 lg:px-10">
       <breadcrumb :value="breadcrumb" type="back" class="pb-5" />
