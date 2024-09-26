@@ -13,15 +13,22 @@ use Inertia\Inertia;
 
 class StandardController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $manufacturers = Manufacturer::where('status_id', '=', 1)->get();
         $solutions = Solution::where('status_id', '=', 1)->get();
+        $standards = Optional::when($request->term, function ($query) use ($request) {
+            $query->where('name', 'LIKE', '%'.$request->term.'%')->paginate();
+
+        }, function ($query) {
+            $query->orderBy('id')->paginate();
+        })->get();
 
         return Inertia::render('Standard/Index',
             [
                 'solutions' => $solutions,
                 'manufacturers' => $manufacturers,
+                'standards' => $standards,
             ]);
     }
 
@@ -67,6 +74,7 @@ class StandardController extends Controller
         $standard->min_height = $request->min_height;
         $standard->max_height = $request->max_height;
         $standard->product_feature = $request->product_feature;
+        $standard->status_id = 1;
         if ($request->solution_id == 1) {
             $standard->supplies = json_encode($request->supplies);
         } elseif ($request->solution_id == 2) {
@@ -79,9 +87,24 @@ class StandardController extends Controller
 
     }
 
-    public function edit()
+    public function edit(Request $request)
     {
-        return Inertia::render('Standard/Edit', []);
+        $standard_id = $request->standard;
+        $standard = Standard::find($standard_id);
+        $manufacturers = Manufacturer::where('status_id', '=', 1)->get();
+        $solutions = Solution::where('status_id', '=', 1)->get();
+        $collections = Collection::where('status_id', '=', 1)->where('solution_id', '=', $solution_id)->get();
+        $optionals = Optional::where('status_id', '=', 1)->get();
+        $triggers = Trigger::where('status_id', '=', 1)->get();
+
+        return Inertia::render('Standard/Edit', [
+            'standard' => $standard,
+            'manufacturers' => $manufacturers,
+            'solutions' => $solutions,
+            'collections' => $collections,
+            'optionals' => $optionals,
+            'triggers' => $triggers,
+        ]);
     }
 
     public function getCollections(Request $request)

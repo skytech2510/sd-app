@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('solution_id');
             $table->unsignedBigInteger('manufacturer_id');
             $table->json('collection_ids');
+            $table->unsignedBigInteger('status_id');
             $table->json('colors')->nullable();
             $table->double('min_width', 5, 2)->nullable()->default(0);
             $table->double('max_width', 5, 2)->nullable()->default(0);
