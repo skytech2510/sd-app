@@ -1,11 +1,10 @@
 <?php
 
+use App\Http\Controllers\ChatBotController;
+use App\Http\Controllers\LeadController;
+use App\Http\Controllers\NotificationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ChatBotController;
-use App\Http\Controllers\NotificationController;
-use App\Http\Controllers\LeadController;
-use App\Http\Controllers\SocialAuthFacebookController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,43 +35,46 @@ Route::controller(NotificationController::class)->group(function () {
 
 Route::get('/leads', [LeadController::class, 'leadswaiting']);
 
-Route::get('/items', function(Request $request) {
+Route::get('/', function (Request $request) {
     $data = [
         [
-            "id" => 7,
-            "name" => "na like this",
-            "description" => "",
-            "created_at" => "2020-07-26T05:53:00.376501Z",
-            "updated_at" => "2020-07-26T05:53:00.376501Z"
+            'id' => 7,
+            'name' => 'na like this',
+            'description' => '',
+            'created_at' => '2020-07-26T05:53:00.376501Z',
+            'updated_at' => '2020-07-26T05:53:00.376501Z',
         ], [
-            "id" => 5,
-            "name" => "write a book",
-            "description" => "hohoho",
-            "created_at" => "2020-07-26T05:47:00.908706Z",
-            "updated_at" => "2020-07-26T05:53:00.376501Z"
-        ]
+            'id' => 5,
+            'name' => 'write a book',
+            'description' => 'hohoho',
+            'created_at' => '2020-07-26T05:47:00.908706Z',
+            'updated_at' => '2020-07-26T05:53:00.376501Z',
+        ],
     ];
+
     return response()->json($data);
 });
 
-Route::get('/items/{id}', function(Request $request) {
+Route::get('/items/{id}', function (Request $request) {
     $data = [
         'id' => 1,
-        'name' => "Swim across the River Benue",
-        'description' => "ho ho ho",
-        'created_at' => "2020-07-26T22:31:04.49683Z",
-        'updated_at' => "2020-07-26T22:31:04.49683Z"
+        'name' => 'Swim across the River Benue',
+        'description' => 'ho ho ho',
+        'created_at' => '2020-07-26T22:31:04.49683Z',
+        'updated_at' => '2020-07-26T22:31:04.49683Z',
     ];
+
     return response()->json($data);
 });
 
-Route::post('/items', function(Request $request) {
+Route::post('/items', function (Request $request) {
     $data = [
         'id' => 1,
-        'name' => "Swim across the River Benue",
-        'description' => "ho ho ho",
-        'created_at' => "2020-07-26T22:31:04.49683Z",
-        'updated_at' => "2020-07-26T22:31:04.49683Z"
+        'name' => 'Swim across the River Benue',
+        'description' => 'ho ho ho',
+        'created_at' => '2020-07-26T22:31:04.49683Z',
+        'updated_at' => '2020-07-26T22:31:04.49683Z',
     ];
+
     return response()->json($data, 201);
 });
