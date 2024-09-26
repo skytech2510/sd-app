@@ -31,6 +31,7 @@ use App\Http\Controllers\ReceivableController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SocialAuthFacebookController;
 use App\Http\Controllers\SolutionController;
+use App\Http\Controllers\StandardController;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UserController;
@@ -325,6 +326,13 @@ Route::controller(PartnerController::class)->group(function () {
     Route::post('/especificadores/update', 'update')->name('partner.update');
     Route::delete('/especificadores/{status}', 'destroy')->name('partner.destroy');
     Route::post('/especificadores', 'store')->name('partner.store');
+})->middleware(['auth', 'verified']);
+
+Route::controller(StandardController::class)->group(function () {
+    Route::get('/standard', 'index')->name('standard.index');
+    Route::get('/standard/criar', 'create')->name('standard.create');
+    Route::post('/standard', 'store')->name('standard.store');
+    Route::get('/standard/getCollections/{solution_id}', 'getCollections')->name('standard.getCollections');
 })->middleware(['auth', 'verified']);
 
 Route::controller(FunnelStepController::class)->group(function () {
