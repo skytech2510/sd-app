@@ -18,6 +18,7 @@ use App\Http\Controllers\LeadController;
 use App\Http\Controllers\LeadMessageController;
 use App\Http\Controllers\LeadNotesController;
 use App\Http\Controllers\LeadScheduleController;
+use App\Http\Controllers\ManufacturerController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\OptionalController;
 use App\Http\Controllers\OrigemController;
@@ -353,6 +354,17 @@ Route::controller(ReadyMessageController::class)->group(function () {
     Route::put('/messagem-rapida/{message}', 'update')->name('message.update');
     Route::delete('/messagem-rapida/{message}', 'destroy')->name('message.destroy');
     Route::post('/messagem-rapida', 'store')->name('message.store');
+})->middleware(['auth', 'verified']);
+
+Route::controller(ManufacturerController::class)->group(function () {
+
+    Route::get('/fabricante', 'index')->name('manufacturer.index');
+    Route::get('/fabricante/criar', 'create')->name('manufacturer.create');
+    Route::post('/fabricante', 'store')->name('manufacturer.store');
+    Route::get('/fabricante/{manufacturer}/editar', 'edit')->name('manufacturer.edit');
+    Route::put('/fabricante/{manufacturer}', 'update')->name('manufacturer.update');
+    Route::delete('/fabricante/{manufacturer}', 'destroy')->name('manufacturer.destroy');
+
 })->middleware(['auth', 'verified']);
 
 Route::controller(UserController::class)->group(function () {

@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
-
 class ManufacturerController extends Controller
 {
     /**
@@ -16,12 +15,8 @@ class ManufacturerController extends Controller
     public function index()
     {
         $manufactures = Manufacturer::where('status_id', '=', 1)->get();
-        return Inertia::render(
-            'Manufacturer/Index',
-            [
-                'manufacturers' => $manufactures
-            ]
-        );
+
+        return Inertia::render('Manufacturer/Index', ['manufacturers' => $manufactures]);
     }
 
     /**
@@ -40,7 +35,7 @@ class ManufacturerController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255'
+            'name' => 'required|string|max:255',
         ]);
         $user = Auth::user();
 
@@ -51,6 +46,7 @@ class ManufacturerController extends Controller
         ]);
 
         sleep(1);
+
         return redirect()->route('manufacturer.index')->with('message', 'Fabricante Criado Com Sucesso');
     }
 
@@ -71,7 +67,7 @@ class ManufacturerController extends Controller
         return Inertia::render(
             'Manufacturer/Edit',
             [
-                'manufacturer' => $manufacturer
+                'manufacturer' => $manufacturer,
             ]
         );
     }
@@ -82,9 +78,9 @@ class ManufacturerController extends Controller
     public function update(Request $request, Manufacturer $manufacturer)
     {
         $request->validate([
-            'name' => 'required|string|max:255'
+            'name' => 'required|string|max:255',
         ]);
-        
+
         $manufacturer->name = $request->name;
         $manufacturer->save();
         sleep(1);
