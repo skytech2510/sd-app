@@ -18,12 +18,10 @@ const breadcrumb = ref({
 watch(term, (value) => {
   router.get("/fabricante", { term: value });
 });
-
+const form = useForm({});
 const props = defineProps({
   manufacturers: Object,
 });
-
-const form = useForm();
 
 function destroy(manufacturer) {
   if (confirm("Confirma a exclusão deste fabricante?")) {
@@ -36,7 +34,7 @@ function destroy(manufacturer) {
   <Head title="Fabricantes" />
 
   <AuthenticatedLayout>
-    <div class="max-w-7xl mx-auto sm:px-4 lg:px-10">
+    <div class="mx-auto max-w-7xl sm:px-4 lg:px-10">
       <breadcrumb :value="breadcrumb" class="pt-4 pb-6" />
       <div class="bg-white">
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -57,15 +55,15 @@ function destroy(manufacturer) {
             </div>
           </div>
           <table
-            class="w-full text-sm text-left font-light text-gray-500 dark:text-gray-400"
+            class="w-full text-sm font-light text-left text-gray-500 dark:text-gray-400"
           >
             <thead
-              class="text-slate-600 uppercase bg-slate-300 dark:bg-gray-700 dark:text-gray-400"
+              class="uppercase text-slate-600 bg-slate-300 dark:bg-gray-700 dark:text-gray-400"
             >
               <tr>
                 <th scope="col" class="px-6 py-2.5 w-2">#</th>
                 <th scope="col" class="px-6 font-light">Nome</th>
-                <th scope="col" class="px-6 w-64"></th>
+                <th scope="col" class="w-64 px-6"></th>
               </tr>
             </thead>
             <tbody>
@@ -77,7 +75,7 @@ function destroy(manufacturer) {
                 <td scope="row" class="px-6 py-4">
                   {{ manufacturer.id }}
                 </td>
-                <td scope="row" class="px-6 w-full">
+                <td scope="row" class="w-full px-6">
                   {{ manufacturer.name }}
                 </td>
 
@@ -127,7 +125,7 @@ function destroy(manufacturer) {
               </tr>
             </tbody>
           </table>
-          <div class="w-full bg-white justify-end py-5">
+          <div class="justify-end w-full py-5 bg-white">
             <!--<Pagination></Pagination>-->
           </div>
         </div>
