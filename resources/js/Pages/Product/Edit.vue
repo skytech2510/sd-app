@@ -345,7 +345,10 @@ function updateProduct() {
                   </div>
                 </div>
                 <div class="w-full">
-                  <textarea class="w-full" v-model="form.observation"></textarea>
+                  <textarea
+                    class="w-full text-sm rounded-md shadow-sm border-slate-300 focus:border-sky-500 focus:ring-sky-500"
+                    v-model="form.observation"
+                  ></textarea>
                 </div>
               </div>
             </div>

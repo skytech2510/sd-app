@@ -136,7 +136,10 @@ function storeMessage() {
                   </div>
                   <div>
                     <InputLabel>Anotações</InputLabel>
-                    <textarea class="w-full" v-model="form.annotation"></textarea>
+                    <textarea
+                      class="w-full text-sm rounded-md shadow-sm border-slate-300 focus:border-sky-500 focus:ring-sky-500"
+                      v-model="form.annotation"
+                    ></textarea>
                   </div>
                 </div>
               </div>
