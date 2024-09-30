@@ -48,8 +48,8 @@ const form = useForm({
   observation: props.product.observation,
   id: props.product.id,
 });
-function updateProduct() {
-  form.post(route("product.update"));
+function createProduct() {
+  form.post(route("product.store"));
 }
 </script>
 <template>
@@ -59,7 +59,7 @@ function updateProduct() {
       <breadcrumb :value="breadcrumb" type="back" class="pb-5" />
       <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
         <div class="p-6 bg-white border-b border-gray-200">
-          <form @submit.prevent="updateProduct">
+          <form @submit.prevent="createProduct">
             <div class="pb-12 border-b border-slate-900/10">
               <h2 class="text-base font-semibold leading-7 text-sky-900">Produtos</h2>
               <div class="flex flex-col gap-3">
@@ -345,7 +345,10 @@ function updateProduct() {
                   </div>
                 </div>
                 <div class="w-full">
-                  <textarea class="w-full" v-model="form.observation"></textarea>
+                  <textarea
+                    class="w-full text-sm rounded-md shadow-sm border-slate-300 focus:border-sky-500 focus:ring-sky-500"
+                    v-model="form.observation"
+                  ></textarea>
                 </div>
               </div>
             </div>
