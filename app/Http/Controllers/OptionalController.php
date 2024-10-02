@@ -36,6 +36,7 @@ class OptionalController extends Controller
             'name' => 'required|string|max:255',
             'observation' => 'nullable|string',
             'manufacturer_id' => 'required|exists:manufacturers,id',
+            'item' => 'required|numeric',
             'price' => 'numeric|min:0',
             'annotation' => 'nullable|string',
         ]);
@@ -46,6 +47,7 @@ class OptionalController extends Controller
             'annotation' => $request->annotation,
             'price' => $request->price,
             'manufacturer_id' => $request->manufacturer_id,
+            'item' => $request->item,
 
         ]);
         sleep(1);
@@ -69,6 +71,7 @@ class OptionalController extends Controller
             'name' => 'required|string|max:255',
             'observation' => 'nullable|string',
             'manufacturer_id' => 'required|exists:manufacturers,id',
+            'item' => 'required|numeric',
             'price' => 'numeric|min:0',
             'annotation' => 'nullable|string',
         ]);
@@ -77,6 +80,7 @@ class OptionalController extends Controller
         $optional->annotation = $request->annotation;
         $optional->price = $request->price;
         $optional->manufacturer_id = $request->manufacturer_id;
+        $optional->item = $request->item;
         $optional->save();
         sleep(1);
 

@@ -13,12 +13,27 @@ const breadcrumb = ref({
   page: { id: 1, name: "Configurações", url: "/configuracao" },
   link: { id: 1, name: "Mensagens Rápidas", url: "/messagem-rapida" },
 });
+const Items = [
+  {
+    id: 1,
+    name: "Altura",
+  },
+  {
+    id: 2,
+    name: "Largura",
+  },
+  {
+    id: 3,
+    name: "Peça",
+  },
+];
 const form = useForm({
   name: null,
   manufacturer_id: null,
   price: 0,
   observation: null,
   annotation: null,
+  item: null,
 });
 const props = defineProps({
   manufacturers: Object,
@@ -60,7 +75,7 @@ function storeMessage() {
                       >Fabricação
                     </Inputlabel>
                     <select
-                      v-model="manufacturer_id"
+                      v-model="form.manufacturer_id"
                       class="w-full text-sm border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-indigo-500"
                     >
                       <option :value="null">Selecione</option>
@@ -81,28 +96,21 @@ function storeMessage() {
                   </div>
                   <div>
                     <Inputlabel
-                      for="Fabricação"
+                      for="item"
                       class="block mb-2 text-sm font-mecold dium text-slate-900 dark:text-slate-300"
-                      >Fabricação
+                      >Unid.
                     </Inputlabel>
                     <select
-                      v-model="form.manufacturer_id"
+                      v-model="form.item"
                       class="w-full text-sm border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-indigo-500"
                     >
                       <option :value="null">Selecione</option>
-                      <option
-                        v-for="manufacturer in manufacturers"
-                        :key="manufacturer.id"
-                        :value="`${manufacturer.id}`"
-                      >
-                        {{ manufacturer.name }}
+                      <option v-for="item in Items" :key="item.id" :value="`${item.id}`">
+                        {{ item.name }}
                       </option>
                     </select>
-                    <div
-                      v-if="form.errors.manufacturer_id"
-                      class="mt-2 text-sm text-red-500"
-                    >
-                      {{ form.errors.manufacturer_id }}
+                    <div v-if="form.errors.item" class="mt-2 text-sm text-red-500">
+                      {{ form.errors.item }}
                     </div>
                   </div>
                   <div>

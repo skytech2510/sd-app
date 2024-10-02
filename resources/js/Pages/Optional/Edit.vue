@@ -13,6 +13,20 @@ const breadcrumb = ref({
   page: { id: 1, name: "Configurações", url: "/configuracao" },
   link: { id: 1, name: "Mensagens Rápidas", url: "/messagem-rapida" },
 });
+const Items = [
+  {
+    id: 1,
+    name: "Altura",
+  },
+  {
+    id: 2,
+    name: "Largura",
+  },
+  {
+    id: 3,
+    name: "Peça",
+  },
+];
 const props = defineProps({
   manufacturers: Object,
   optional: Object,
@@ -24,6 +38,7 @@ const form = useForm({
   price: 0,
   observation: null,
   annotation: null,
+  item: null,
 });
 function storeMessage() {
   form.post("/opcionals/update");
@@ -35,6 +50,7 @@ onMounted(() => {
   form.manufacturer_id = props.optional.manufacturer_id;
   form.price = props.optional.price;
   form.id = props.optional.id;
+  form.item = props.optional.item;
 });
 </script>
 <template>
@@ -57,8 +73,8 @@ onMounted(() => {
                     class="w-full"
                     placeholder=""
                   />
-                  <div v-if="form.errors.title" class="mt-2 text-sm text-red-500">
-                    {{ form.errors.title }}
+                  <div v-if="form.errors.name" class="mt-2 text-sm text-red-500">
+                    {{ form.errors.name }}
                   </div>
                 </div>
                 <div class="grid grid-cols-3 gap-3 mt-3">
@@ -81,31 +97,30 @@ onMounted(() => {
                         {{ manufacturer.name }}
                       </option>
                     </select>
-                    <div v-if="form.errors.message" class="mt-2 text-sm text-red-500">
-                      {{ form.errors.message }}
+                    <div
+                      v-if="form.errors.manufacturer_id"
+                      class="mt-2 text-sm text-red-500"
+                    >
+                      {{ form.errors.manufacturer_id }}
                     </div>
                   </div>
                   <div>
                     <Inputlabel
-                      for="Fabricação"
+                      for="item"
                       class="block mb-2 text-sm font-mecold dium text-slate-900 dark:text-slate-300"
-                      >Fabricação
+                      >item.
                     </Inputlabel>
                     <select
-                      v-model="form.manufacturer_id"
+                      v-model="form.item"
                       class="w-full text-sm border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-indigo-500"
                     >
                       <option :value="null">Selecione</option>
-                      <option
-                        v-for="manufacturer in manufacturers"
-                        :key="manufacturer.id"
-                        :value="`${manufacturer.id}`"
-                      >
-                        {{ manufacturer.name }}
+                      <option v-for="item in Items" :key="item.id" :value="`${item.id}`">
+                        {{ item.name }}
                       </option>
                     </select>
-                    <div v-if="form.errors.message" class="mt-2 text-sm text-red-500">
-                      {{ form.errors.message }}
+                    <div v-if="form.errors.item" class="mt-2 text-sm text-red-500">
+                      {{ form.errors.item }}
                     </div>
                   </div>
                   <div>
@@ -117,8 +132,8 @@ onMounted(() => {
                       class="w-full"
                       placeholder=""
                     />
-                    <div v-if="form.errors.title" class="mt-2 text-sm text-red-500">
-                      {{ form.errors.title }}
+                    <div v-if="form.errors.price" class="mt-2 text-sm text-red-500">
+                      {{ form.errors.price }}
                     </div>
                   </div>
                 </div>
@@ -135,8 +150,8 @@ onMounted(() => {
                       class="w-full"
                       placeholder=""
                     />
-                    <div v-if="form.errors.title" class="mt-2 text-sm text-red-500">
-                      {{ form.errors.title }}
+                    <div v-if="form.errors.observation" class="mt-2 text-sm text-red-500">
+                      {{ form.errors.observation }}
                     </div>
                   </div>
                   <div>

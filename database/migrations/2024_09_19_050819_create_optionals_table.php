@@ -13,16 +13,17 @@ return new class extends Migration
     {
         Schema::create('optionals', function (Blueprint $table) {
             $table->id();
-            $table->string("name");
-            $table->string("observation");
-            $table->string("annotation");
+            $table->string('name');
+            $table->string('observation');
+            $table->string('annotation');
             $table->unsignedBigInteger('status_id');
-            $table->unsignedBigInteger("manufacturer_id");
-            $table->float("price", 8, 2);
+            $table->unsignedBigInteger('manufacturer_id');
+            $table->integer('item');
+            $table->float('price', 8, 2);
             $table->timestamps();
 
             $table->foreign('status_id')->references('id')->on('status');
-            $table->foreign("manufacturer_id")->references("id")->on("manufacturers");
+            $table->foreign('manufacturer_id')->references('id')->on('manufacturers');
         });
     }
 
