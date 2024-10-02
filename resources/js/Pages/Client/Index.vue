@@ -18,7 +18,14 @@ const breadcrumb = ref({
 });
 
 watch(term, (value) => {
-  router.get("/cliente", { term: value });
+  router.get(
+    "/cliente",
+    { term: value },
+    {
+      preserveState: true,
+      replace: true,
+    }
+  );
 });
 
 const props = defineProps({
@@ -90,7 +97,7 @@ function destroy(client) {
                   {{ client.document }}
                 </td>
                 <td scope="row" class="px-6">
-                  {{ client.city.nome }} / {{ client.state.nome}}
+                  {{ client.city.nome }} / {{ client.state.nome }}
                 </td>
                 <td scope="row" class="px-6">
                   {{ client.cellphone }}
