@@ -14,14 +14,19 @@ class ClientController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $clients = Client::with('City', 'State')->where('status_id', '=', 1)->get();
+        $clients = Client::when($request->term, function ($query) use ($request) {
+            $query->where('name', 'LIKE', '%'.$request->term.'%')->paginate();
+
+        }, function ($query) {
+            $query->orderBy('id')->paginate();
+        })->with(['City', 'State'])->where('status_id', '=', 1)->get();
 
         return Inertia::render(
             'Client/Index',
             [
-                'clients' => $clients
+                'clients' => $clients,
             ]
         );
     }
@@ -98,10 +103,11 @@ class ClientController extends Controller
             'social_network' => $request->social_network,
 
             'status_id' => 1,
-            'company_id' => Auth::user()->company_id
+            'company_id' => Auth::user()->company_id,
         ]);
 
         sleep(1);
+
         return redirect()->route('client.index')->with('message', 'Cliente criado Com Sucesso');
     }
 
@@ -183,10 +189,11 @@ class ClientController extends Controller
         $client->email = $request->email;
         $client->site = $request->site;
         $client->social_network = $request->social_network;
-        
+
         $client->save();
 
         sleep(1);
+
         return redirect()->route('client.index')->with('message', 'Cliente atualizado com sucesso');
     }
 
@@ -199,6 +206,7 @@ class ClientController extends Controller
         $client->save();
 
         sleep(1);
+
         return redirect()->route('client.index')->with('message', 'Cliente excluído com sucesso');
     }
 }

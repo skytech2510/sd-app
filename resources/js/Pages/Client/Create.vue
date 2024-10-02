@@ -382,12 +382,11 @@ function store() {
                 <div class="sm:col-span-6">
                   <TextInput
                     textLabel="Email"
-                    type="text"
+                    type="email"
                     v-model="form.email"
                     name="email"
                     class="w-full"
                     placeholder=""
-                    mask="(XX) XXXXX-XXXX"
                   />
                   <div v-if="form.errors.email" class="text-sm text-red-500 mt-2">
                     {{ form.errors.email }}
