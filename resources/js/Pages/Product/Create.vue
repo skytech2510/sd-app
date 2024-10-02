@@ -11,6 +11,20 @@ const breadcrumb = ref({
   page: { id: 1, name: "Configurações", url: "/configuracao" },
   link: { id: 1, name: "Produto", url: "/produto" },
 });
+const Items = [
+  {
+    id: 1,
+    name: "Altura",
+  },
+  {
+    id: 2,
+    name: "Largura",
+  },
+  {
+    id: 3,
+    name: "Peça",
+  },
+];
 const props = defineProps({
   product: {
     type: Object,
@@ -28,25 +42,24 @@ const props = defineProps({
 });
 
 const form = useForm({
-  name: props.product.name,
-  supplier_code: props.product.supplier_code,
-  solution_id: props.product.solution_id,
-  manufacturer_id: props.product.manufacturer_id,
-  supplier_id: props.product.supplier_id,
-  item: props.product.item,
-  color: props.product.color,
-  cost: props.product.cost,
-  size: props.product.size,
-  NCM: props.product.NCM,
-  CFOP: props.product.CFOP,
-  discount: props.product.discount,
-  ST: props.product.ST,
-  IPI: props.product.IPI,
-  freight: props.product.freight,
-  markup: props.product.markup,
-  price: props.product.price,
-  observation: props.product.observation,
-  id: props.product.id,
+  name: null,
+  supplier_code: null,
+  solution_id: null,
+  manufacturer_id: null,
+  supplier_id: null,
+  item: null,
+  color: null,
+  cost: 0,
+  size: null,
+  NCM: null,
+  CFOP: null,
+  discount: 0,
+  ST: 0,
+  IPI: 0,
+  freight: 0,
+  markup: 0,
+  price: 0,
+  observation: null,
 });
 function createProduct() {
   form.post(route("product.store"));
@@ -92,7 +105,7 @@ function createProduct() {
                         v-model="form.manufacturer_id"
                         class="w-full text-sm border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-indigo-500"
                       >
-                        <option value="">Selecione</option>
+                        <option value="null">Selecione</option>
                         <option
                           v-for="(item, index) in manufacturers"
                           :key="item.id"
@@ -281,7 +294,7 @@ function createProduct() {
                         name="solução"
                         class="w-full text-sm border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-indigo-500"
                       >
-                        <option value="">Selecione</option>
+                        <option value="null">Selecione</option>
                         <option
                           v-for="(item, index) in solutions"
                           :key="item.id"
@@ -308,9 +321,14 @@ function createProduct() {
                         v-model="form.item"
                         class="w-full text-sm border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-indigo-500"
                       >
-                        <option value="">Selecione</option>
-                        <option value="111">111</option>
-                        <option value="222">222</option>
+                        <option value="null">Selecione</option>
+                        <option
+                          v-for="(item, index) in Items"
+                          :key="index"
+                          :value="item.id"
+                        >
+                          {{ item.name }}
+                        </option>
                       </select>
                       <div v-if="form.errors.item" class="mt-2 text-sm text-red-500">
                         {{ form.errors.item }}

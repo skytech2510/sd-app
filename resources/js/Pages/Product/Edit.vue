@@ -11,6 +11,20 @@ const breadcrumb = ref({
   page: { id: 1, name: "Configurações", url: "/configuracao" },
   link: { id: 1, name: "Produto", url: "/produto" },
 });
+const Items = [
+  {
+    id: 1,
+    name: "Altura",
+  },
+  {
+    id: 2,
+    name: "Largura",
+  },
+  {
+    id: 3,
+    name: "Peça",
+  },
+];
 const props = defineProps({
   product: {
     type: Object,
@@ -92,7 +106,7 @@ function updateProduct() {
                         v-model="form.manufacturer_id"
                         class="w-full text-sm border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-indigo-500"
                       >
-                        <option value="">Selecione</option>
+                        <option value="null">Selecione</option>
                         <option
                           v-for="(item, index) in manufacturers"
                           :key="item.id"
@@ -157,7 +171,7 @@ function updateProduct() {
                         name="fornecedor"
                         class="w-full text-sm border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-indigo-500"
                       >
-                        <option value="">Selecione</option>
+                        <option value="null">Selecione</option>
                         <option
                           v-for="(item, index) in suppliers"
                           :key="item.id"
@@ -308,9 +322,14 @@ function updateProduct() {
                         v-model="form.item"
                         class="w-full text-sm border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-indigo-500"
                       >
-                        <option value="">Selecione</option>
-                        <option value="111">111</option>
-                        <option value="222">222</option>
+                        <option value="null">Selecione</option>
+                        <option
+                          v-for="(item, index) in Items"
+                          :key="index"
+                          :value="item.id"
+                        >
+                          {{ item.name }}
+                        </option>
                       </select>
                       <div v-if="form.errors.item" class="mt-2 text-sm text-red-500">
                         {{ form.errors.item }}
