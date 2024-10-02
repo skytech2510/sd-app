@@ -295,7 +295,7 @@ function updateProduct() {
                         name="solução"
                         class="w-full text-sm border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-indigo-500"
                       >
-                        <option value="">Selecione</option>
+                        <option value="null">Selecione</option>
                         <option
                           v-for="(item, index) in solutions"
                           :key="item.id"

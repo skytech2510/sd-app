@@ -14,6 +14,20 @@ const breadcrumb = ref({
   page: { id: 1, name: "Configurações", url: "/configuracao" },
   link: { id: 1, name: "Produto", url: "/produto" },
 });
+const Items = [
+  {
+    id: 1,
+    name: "Altura",
+  },
+  {
+    id: 2,
+    name: "Largura",
+  },
+  {
+    id: 3,
+    name: "Peça",
+  },
+];
 const props = defineProps({
   products: Object,
   term: String,
@@ -96,7 +110,7 @@ function destroy(id) {
                   {{ product.manufacturer.name }}
                 </td>
                 <td scope="row" class="w-full px-6">
-                  {{ product.item }}
+                  {{ Items.find((item) => item.id == product.item)?.name }}
                 </td>
                 <td scope="row" class="w-full px-6">
                   {{ product.solution.name }}

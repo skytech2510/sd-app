@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->unsignedBigInteger('status_id');
             $table->string('supplier_code');
-            $table->string('item');
+            $table->integer('item');
             $table->string('color');
             $table->string('size');
             $table->string('NCM');

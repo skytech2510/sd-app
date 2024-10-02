@@ -12,6 +12,20 @@ const breadcrumb = ref({
   page: { id: 1, name: "Configurações", url: "/configuracao" },
   link: { id: 2, name: "standard", url: "/standard" },
 });
+const Items = [
+  {
+    id: 1,
+    name: "Altura",
+  },
+  {
+    id: 2,
+    name: "Largura",
+  },
+  {
+    id: 3,
+    name: "Peça",
+  },
+];
 const fittings = [
   { id: 1, name: "AAA" },
   { id: 2, name: "BBB" },
@@ -296,7 +310,7 @@ function storeSolution() {
                             id=""
                             class="w-full text-sm rounded-md shadow-sm border-slate-300 focus:border-sky-500 focus:ring-sky-500"
                           >
-                            <option value="">Selecione</option>
+                            <option value="null">Selecione</option>
                             <option
                               v-for="(item, index) in fittings"
                               :key="index"
@@ -380,7 +394,7 @@ function storeSolution() {
                               v-model="pageState.drive.trigger"
                               class="w-full text-sm rounded-md shadow-sm border-slate-300 focus:border-sky-500 focus:ring-sky-500"
                             >
-                              <option value="">Selecione</option>
+                              <option value="null">Selecione</option>
                               <option
                                 v-for="(item, index) in triggers"
                                 :key="index"
@@ -398,10 +412,14 @@ function storeSolution() {
                               v-model="pageState.drive.item"
                               class="w-full text-sm rounded-md shadow-sm border-slate-300 focus:border-sky-500 focus:ring-sky-500"
                             >
-                              <option value="">Selecione</option>
-                              <option value="addtion ">Acréscimo</option>
-                              <option value="width ">Largura</option>
-                              <option value="part ">Peça</option>
+                              <option value="null">Selecione</option>
+                              <option
+                                v-for="(item, index) in Items"
+                                :key="index"
+                                :value="item.id"
+                              >
+                                {{ item.name }}
+                              </option>
                             </select>
                           </div>
                           <div class="flex-1">
@@ -439,7 +457,7 @@ function storeSolution() {
                             <tbody>
                               <tr v-for="(item, index) in form.drives" :key="index">
                                 <td class="px-6 py-4">{{ item.trigger.name }}</td>
-                                <td>{{ item.item }}</td>
+                                <td>{{ Items.find((a) => a.id == item.item)?.name }}</td>
                                 <td>$ {{ item.price }}</td>
                                 <td>
                                   <Button
